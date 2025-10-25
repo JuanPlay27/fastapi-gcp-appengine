@@ -1,4 +1,10 @@
-env/
-.env
+# Entornos virtuales
 venv/
+env/
+
+# Archivos de entorno
+.env
+
+# Archivos compilados
 __pycache__/
+*.pyc
