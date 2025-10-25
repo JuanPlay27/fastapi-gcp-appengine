@@ -1,12 +1,20 @@
+
+
 from fastapi import FastAPI
 from database import get_db_connection
 from dotenv import load_dotenv
-import os
+from pydantic import BaseModel
+import os 
 
-# Cargar variables del archivo .env
 load_dotenv()
-
 app = FastAPI()
+
+
+
+# Modelo para recibir datos del estudiante
+class Student(BaseModel):
+    name: str
+    age: int
 
 @app.get("/")
 def read_root():
@@ -23,10 +31,13 @@ def read_students():
     return {"students": students}
 
 @app.post("/students")
-def create_student(name: str, age: int):
+def create_student(student: Student):
     db = get_db_connection()
     cursor = db.cursor()
-    cursor.execute("INSERT INTO students (name, age) VALUES (%s, %s) RETURNING *;", (name, age))
+    cursor.execute(
+        "INSERT INTO students (name, age) VALUES (%s, %s) RETURNING *;",
+        (student.name, student.age)
+    )
     new_student = cursor.fetchone()
     db.commit()
     cursor.close()

@@ -5,7 +5,7 @@ env_variables:
   HOLA_MUNDO: 'adios tonotos'
   DB_HOST: '/cloudsql/nube-2025-ii:us-central1:dbmendoza'
   DB_NAME: 'postgres'
-  DB_USER: 'mendoza'
+  DB_USER: 'postgres'
   DB_PASSWORD: 'V@.lery27890'
 
 beta_settings:
